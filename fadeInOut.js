@@ -18,19 +18,22 @@ function fadeInOutpopUp(openBtn, closeBtn, overlay) {
         })
     }
 
-    function disappearancePopup() {
-        let opacity = 1;
-        let requestId = requestAnimationFrame(function animate() {
-            overlay.style.opacity = opacity;
-            opacity -= 0.05 * opacity;
-            if (opacity > 0.2) {
-                requestAnimationFrame(animate);
-            } else {
-                overlay.style.display = 'none';
-                overlay.style.opacity = '';
-            };
-        })
-        document.body.style.overflow = '';
+    function disappearancePopup(event) {
+        if (event.target == overlay ||event.target == popupCloseBtn) {
+            moreBtn.classList.remove('more-splash')
+            let opacity = 1;
+            let requestId = requestAnimationFrame(function animate() {
+                overlay.style.opacity = opacity;
+                opacity -= 0.05 * opacity;
+                if (opacity > 0.2) {
+                    requestAnimationFrame(animate);
+                } else {
+                    overlay.style.display = 'none';
+                    overlay.style.opacity = '';
+                };
+            })
+            document.body.style.overflow = '';
+        }
     }
 
     openBtn.addEventListener('click', appearancePopup);
